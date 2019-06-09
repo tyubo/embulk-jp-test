@@ -1,0 +1,10 @@
+in:
+  type: postgresql
+  host: host.docker.internal
+  database: jp_test
+  user: user
+  default_timezone: 'Asia/Tokyo'
+{% include 'query' %}
+
+out:
+  type: stdout

@@ -1,0 +1,12 @@
++check_encode_templates:
+  sh>: nkf -g jp_test.dig jp_test.yml.liquid _query.yml.liquid
+
++check_locale:
+  docker:
+    image: jp_test
+  sh>: locale
+
++run_embulk:
+  docker:
+    image: jp_test
+  sh>: embulk run -b /var/lib/embulk jp_test.yml.liquid
