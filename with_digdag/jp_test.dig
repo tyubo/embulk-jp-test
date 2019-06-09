@@ -3,10 +3,10 @@
 
 +check_locale:
   docker:
-    image: jp_test
+    image: jp_test/with_digdag
   sh>: locale
 
 +run_embulk:
   docker:
-    image: jp_test
+    image: jp_test/with_digdag
   sh>: embulk run -b /var/lib/embulk jp_test.yml.liquid
