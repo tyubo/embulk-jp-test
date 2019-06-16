@@ -1,0 +1,4 @@
+source "http://rubygems.org"
+
+gem 'embulk', '= 0.9.5'
+gem 'embulk-input-postgresql', '= 0.9.3'
