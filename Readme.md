@@ -68,3 +68,33 @@ Test was successful
 好きなもの2
 2019-06-09 12:47:33.722 +0000 [INFO] (0001:transaction): {done:  1 / 1, running: 0}
 ```
+
+# with digdag modify
+add localedef command and set env LANG,LANGUAGE,LC_ALL to enable to use utf-8
+
+```bash
+cd with_digdag_mod
+docker build . -t jp_test/with_digdag_mod
+digdag run jp_test.dig
+```
+
+Test was successful
+```
+2019-06-16 06:13:01.639 +0000 [INFO] (0001:transaction): SQL: SET search_path TO "public"
+2019-06-16 06:13:01.654 +0000 [INFO] (0001:transaction): Using JDBC Driver PostgreSQL 9.4 JDBC4.1 (build 1205)
+2019-06-16 06:13:01.729 +0000 [INFO] (0001:transaction): Using local thread executor with max_threads=4 / output tasks 2 = input tasks 1 * 2
+2019-06-16 06:13:01.735 +0000 [INFO] (0001:transaction): {done:  0 / 1, running: 0}
+2019-06-16 06:13:01.887 +0000 [INFO] (0017:task-0000): Connecting to jdbc:postgresql://host.docker.internal:5432/jp_test options {ApplicationName=embulk-input-postgresql, user=user, password=***, tcpKeepAlive=true, loginTimeout=300, socketTimeout=1800}
+2019-06-16 06:13:01.919 +0000 [INFO] (0017:task-0000): SQL: SET search_path TO "public"
+2019-06-16 06:13:01.929 +0000 [INFO] (0017:task-0000): SQL: DECLARE cur NO SCROLL CURSOR FOR SELECT * FROM jp_test WHERE col1 like '%好きなもの%'
+2019-06-16 06:13:01.939 +0000 [INFO] (0017:task-0000): SQL: FETCH FORWARD 10000 FROM cur
+2019-06-16 06:13:01.944 +0000 [INFO] (0017:task-0000): > 0.00 seconds
+2019-06-16 06:13:01.953 +0000 [INFO] (0017:task-0000): SQL: FETCH FORWARD 10000 FROM cur
+2019-06-16 06:13:01.955 +0000 [INFO] (0017:task-0000): > 0.00 seconds
+好きなもの1
+好きなもの2
+2019-06-16 06:13:01.962 +0000 [INFO] (0001:transaction): {done:  1 / 1, running: 0}
+2019-06-16 06:13:01.973 +0000 [INFO] (main): Committed.
+2019-06-16 06:13:01.974 +0000 [INFO] (main): Next config diff: {"in":{},"out":{}}
+```
+
